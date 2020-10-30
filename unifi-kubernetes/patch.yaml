@@ -1,0 +1,12 @@
+spec:
+  template:
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        key: internal-lan
+        operator: Exists
+      nodeSelector:
+        internal-lan: 'true'
+      selector:
+        internal-lan: 'true'
+  clusterIP: 192.168.1.45

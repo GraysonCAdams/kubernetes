@@ -1,0 +1,34 @@
+persistence:
+    storageClass: 'unifi-storage'
+
+nodeSelector:
+    internal-lan: 'true'
+
+guiService:
+    port: 8443
+    type: NodePort
+    loadBalancerIP: 192.168.1.45
+    externalTrafficPolicy: Local
+
+# controllerService:
+#     port: 8080
+#     type: NodePort
+
+# # ingress:
+# #     enabled: true
+# #     hosts:
+# #         - unifi.in.graysons.network
+# #     tls:
+# #         - hosts:
+# #             - unifi.in.graysons.network
+# #     annotations:
+# #         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+
+# captivePortalService:
+#     enabled: true
+#     port: 8880
+#     type: ClusterIP
+#     ingress:
+#         enabled: true
+#         hosts:
+#             - hotspot.in.graysons.network

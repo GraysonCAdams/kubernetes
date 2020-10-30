@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  # namespace: nextcloud - overrides any command specifications
+  labels:
+    app: nextcloud
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: nextcloud
+  template:
+    metadata:
+      labels:
+        pod-label: nextcloud
+        app: nextcloud
+        tier: frontend
+    spec:
+      containers:
+        - name: nextcloud
+          image: nextcloud:20
+          volumeMounts:
+            - name: nextcloud-storage
+              mountPath: /var/www/html
+              subPath: html-data
+      volumes:
+        - name: nextcloud-storage
+          persistentVolumeClaim:
+            claimName: nextcloud-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextcloud
+  labels:
+      app: nextcloud
+spec:
+  type: NodePort
+  selector:
+    pod-label: nextcloud
+  ports:
+  - protocol: TCP
+    port: 80

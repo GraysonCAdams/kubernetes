@@ -1,0 +1,11 @@
+master:
+    ingress:
+        enabled: true
+        hostName: jenkins.in.graysons.network
+
+    admin:
+        existingSecret: "jenkins-admin-login"
+
+persistence:
+    storageClass: "jenkins-storage"
+    size: 8Gi

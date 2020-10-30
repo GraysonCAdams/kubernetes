@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-db
+  # namespace: nextcloud - overrides any command specifications
+  labels:
+    app: nextcloud
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: nextcloud-db
+  template:
+    metadata:
+      labels:
+        pod-label: nextcloud-db
+        app: nextcloud
+        tier: backend
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb:10.5
+          env:
+            - name: MYSQL_DATABASE
+              value: nextcloud
+          envFrom:
+            - secretRef:
+                name: nextcloud-db-secret
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/mysql
+              subPath: mysql-data
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+          - containerPort: 3306
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: nextcloud-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextcloud-db
+  labels:
+      app: nextcloud
+spec:
+  selector:
+    pod-label: nextcloud-db
+  ports:
+  - protocol: TCP
+    port: 3306
+    # targetPort: 3306 - redundant
