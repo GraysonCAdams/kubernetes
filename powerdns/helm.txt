@@ -1,0 +1,1 @@
+helm install powerdns k8s-at-home/powerdns --namespace powerdns

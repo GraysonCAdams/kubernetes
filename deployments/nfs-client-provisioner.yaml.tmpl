@@ -1,0 +1,8 @@
+nfs:
+  server: ${nfs_server_ip}
+  path: ${nfs_mount_path}
+
+storageClass:
+  create: true
+  name: ${nfs_storageclass}
+  reclaimPolicy: Delete

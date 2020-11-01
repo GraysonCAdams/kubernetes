@@ -1,0 +1,16 @@
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  storageClass:  ${nfs_storageclass}
+
+service:
+  type: NodePort
+  servicename: chartmuseum
+
+ingress:
+  enabled: true
+  hosts:
+    - name: charts.in.graysons.network
+      path: /
+      serviceName: chartmuseum

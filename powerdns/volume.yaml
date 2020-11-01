@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: powerdns
+  labels:
+    type: local
+    app: powerdns
+  annotations:
+    volume.alpha.kubernetes.io/storage-class: powerdns-storage
+spec:
+  volumeMode: Filesystem
+  storageClassName: powerdns-storage
+#  persistentVolumeReclaimPolicy: Delete - deletes all storage if claim is removed
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: "/mnt/kubestorage/powerdns"
+    server: 10.0.0.14
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: powerdns-storage-claim
+  labels:
+    app: powerdns
+spec:
+  storageClassName: powerdns-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
