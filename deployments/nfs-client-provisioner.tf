@@ -6,6 +6,7 @@ resource "helm_release" "nfs_client_provisioner" {
   chart      = "nfs-client-provisioner"
   version    = "1.2.9"
   namespace  = "provisioners"
+  # depends_on = [kubernetes_namespace.provisioners]
   values = [
     "${templatefile("${path.module}/nfs-client-provisioner.yaml.tmpl",
       {
