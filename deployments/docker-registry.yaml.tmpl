@@ -1,0 +1,14 @@
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 15Gi
+  storageClass:  ${nfs_storageclass}
+
+service:
+  port: 5000
+
+ingress:
+  enabled: true
+  hosts:
+    - ${docker_registry_fqdn}
+  path: /
