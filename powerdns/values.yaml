@@ -1,9 +1,0 @@
-mariadb:
-  enabled: true
-  master:
-    persistence:
-      enabled: true
-      existingClaim: powerdns-storage-claim
-
-service:
-  type: NodePort
