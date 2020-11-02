@@ -1,0 +1,31 @@
+DNS1: 8.8.8.8
+DNS2: 8.8.4.4
+
+ingress:
+    enabled: true
+    hosts:
+        - ${pihole_fqdn}
+        - ${pihole_fqdn}
+
+persistentVolumeClaim:
+    enabled: true
+    storageClass: ${nfs_storageclass}
+    size: 1Gi
+
+serviceTCP:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${pihole_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+
+serviceUDP:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${pihole_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+
+adminPassword: ${pihole_password}
