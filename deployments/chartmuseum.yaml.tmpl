@@ -6,11 +6,11 @@ persistence:
 
 service:
   type: NodePort
-  servicename: chartmuseum
+  servicename: web
 
 ingress:
   enabled: true
   hosts:
-    - name: charts.in.graysons.network
+    - name: ${chartsmuseum_fqdn}
       path: /
-      serviceName: chartmuseum
+      serviceName: web

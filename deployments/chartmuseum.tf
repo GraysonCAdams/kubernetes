@@ -6,12 +6,12 @@ resource "helm_release" "chartmuseum" {
   chart      = "chartmuseum"
   version    = "2.14.0"
   namespace  = "chartmuseum"
+  depends_on = [kubernetes_namespace.chartmuseum]
   values = [
     "${templatefile("${path.module}/chartmuseum.yaml.tmpl",
       {
-        nfs_server_ip: var.nfs_server_ip,
-        nfs_mount_path: var.nfs_mount_path,
-        nfs_storageclass: var.nfs_storageclass
+        nfs_storageclass : var.nfs_storageclass,
+        chartsmuseum_fqdn : var.chartsmuseum_fqdn
       }
     )}"
   ]
