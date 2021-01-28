@@ -1,0 +1,20 @@
+ingress:
+    enabled: true
+    hosts:
+        - host: ${privatebin_fqdn}
+          paths: ["/"]
+
+persistence:
+    enabled: true
+    storageClass: ${nfs_storageclass}
+    size: 1Gi
+
+
+configs:
+    conf.php: |-
+        burnafterreadingselected = true
+        discussion = false
+        info = ""
+        default = "1day"
+        limit = 0
+        

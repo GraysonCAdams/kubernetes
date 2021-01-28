@@ -37,3 +37,9 @@ tolerations:
 
 nodeSelector:
   internal-lan: 'true'
+
+dnsmasq:
+  customDnsEntries:
+  %{ for entry in dns_entries ~}
+    - address=/${entry.host}/${entry.ip}
+  %{ endfor ~}

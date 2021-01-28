@@ -68,13 +68,36 @@ variable "postgres_password" {
 }
 
 variable "postgres_fqdn" {
-  type        = string
+  type = string
 }
 
 variable "postgres_metallb_ip" {
-  type        = string
+  type = string
 }
 
 variable "docker_metallb_ip" {
-  type        = string
+  type = string
+}
+
+variable "privatebin_fqdn" {
+  type = string
+}
+
+variable "rancher_fqdn" {
+  type = string
+}
+
+variable "rancher_ip" {
+  type = string
+}
+
+variable "reverse_proxy_ip" {
+  type = string
+}
+
+variable "local_dns_entries" {
+  type = list(object({
+    host = string
+    ip   = string
+  }))
 }

@@ -14,7 +14,33 @@ resource "helm_release" "pihole" {
         metallb_pool_name: var.metallb_lan_pool_name,
         pihole_metallb_ip: var.pihole_metallb_ip,
         pihole_fqdn : var.pihole_fqdn,
-        pihole_password : var.pihole_password
+        pihole_password : var.pihole_password,
+        dns_entries: concat(var.local_dns_entries, [
+          {
+            "host": var.rancher_fqdn,
+            "ip": var.reverse_proxy_ip
+          },
+          {
+            "host": var.pihole_fqdn,
+            "ip": var.pihole_metallb_ip
+          },
+          {
+            "host": var.docker_registry_fqdn,
+            "ip": var.docker_metallb_ip
+          },
+          {
+            "host": var.postgres_fqdn,
+            "ip": var.postgres_metallb_ip
+          },
+          {
+            "host": var.privatebin_fqdn,
+            "ip": var.reverse_proxy_ip
+          },
+          {
+            "host": var.chartsmuseum_fqdn,
+            "ip": var.reverse_proxy_ip
+          }
+        ])
       }
     )}"
   ]
