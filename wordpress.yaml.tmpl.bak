@@ -1,0 +1,35 @@
+global:
+  storageClass: ${nfs_storageclass}
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  size: 15Gi
+
+ingress:
+  enabled: true
+  extraHosts:
+  ${indent(2, yamlencode(wordpress_fqdns))}
+
+externalDatabase:
+  host: wordpress-mariadb
+
+mariadb:
+  enabled: true
+  master:
+    persistence:
+      enabled: true
+      accessModes:
+      - ReadWriteOnce
+      size: 8Gi
+
+# Production settings
+
+allowOverrideNone: true
+replicaCount: 3
+
+service:
+  externalTrafficPolicy: Local
+
+metrics:
+  enabled: true

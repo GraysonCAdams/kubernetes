@@ -12,6 +12,8 @@ resource "helm_release" "docker_registry" {
       {
         nfs_storageclass : var.nfs_storageclass,
         docker_registry_fqdn : var.docker_registry_fqdn
+        metallb_pool_name: var.metallb_pool_name,
+        docker_metallb_ip: var.docker_metallb_ip
       }
     )}"
   ]

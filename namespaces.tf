@@ -89,3 +89,95 @@ resource "kubernetes_namespace" "metallb" {
     ]
   }
 }
+
+resource "kubernetes_namespace" "unifi" {
+  metadata {
+    annotations = {
+      name                                        = "unifi"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "unifi"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "wordpress" {
+  metadata {
+    annotations = {
+      name                                        = "wordpress"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "wordpress"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "postgres" {
+  metadata {
+    annotations = {
+      name                                        = "postgres"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "postgres"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "provisioners" {
+  metadata {
+    annotations = {
+      name                                        = "provisioners"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "provisioners"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}

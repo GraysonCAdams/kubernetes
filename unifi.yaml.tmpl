@@ -1,0 +1,73 @@
+image:
+  repository: jacobalberty/unifi
+  tag: 6.0.28
+  pullPolicy: IfNotPresent
+  
+persistence:
+  enabled: true
+  accessModes:
+  - ReadWriteOnce
+  size: 5Gi
+  storageClass: ${nfs_storageclass}
+
+# ingress:
+#   enabled: true
+#   hosts:
+#     - ${unifi_fqdn}
+
+discoveryService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${unifi_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: unifi-svc
+
+stunService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${unifi_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: unifi-svc
+
+controllerService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${unifi_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: unifi-svc
+
+captivePortalService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${unifi_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: unifi-svc
+
+guiService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${unifi_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+    metallb.universe.tf/allow-shared-ip: unifi-svc
+
+ingress:
+  enabled: true
+  hosts:
+    - ${unifi_fqdn}
+
+timezone: "America/New York"
+
+tolerations:
+- effect: NoSchedule
+  key: internal-lan
+  operator: Exists
+
+nodeSelector:
+  internal-lan: 'true'
+
+runAsRoot: 'true'

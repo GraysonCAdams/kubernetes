@@ -1,0 +1,24 @@
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 11.10.0-debian-10-r60
+
+ingress:
+    enabled: true
+    hosts:
+        - ${postgres_fqdn}
+
+postgresqlPassword: ${postgres_password}
+
+persistence:
+    enabled: true
+    storageClass: ${nfs_storageclass}
+    size: 1Gi
+
+service:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${postgres_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+

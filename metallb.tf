@@ -12,8 +12,9 @@ resource "helm_release" "metallb" {
       {
         nfs_storageclass: var.nfs_storageclass,
         metallb_pool_name: var.metallb_pool_name,
-        metallb_start_ip: var.metallb_start_ip,
-        metallb_end_ip: var.metallb_end_ip
+        metallb_ip_ranges: var.metallb_ip_ranges,
+        metallb_lan_pool_name: var.metallb_lan_pool_name,
+        metallb_lan_ip_ranges: var.metallb_lan_ip_ranges
       }
     )}"
   ]

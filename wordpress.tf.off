@@ -1,0 +1,18 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/wordpress
+
+resource "helm_release" "wordpress" {
+  name       = "wordpress"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "wordpress"
+  version    = "9.9.1"
+  namespace  = "wordpress"
+  depends_on = [kubernetes_namespace.wordpress]
+  values = [
+    "${templatefile("${path.module}/wordpress.yaml.tmpl",
+      {
+        nfs_storageclass : var.nfs_storageclass,
+        wordpress_fqdns : var.wordpress_fqdns
+      }
+    )}"
+  ]
+}

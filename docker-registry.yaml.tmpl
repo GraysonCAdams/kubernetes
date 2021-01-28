@@ -12,3 +12,13 @@ ingress:
   hosts:
     - ${docker_registry_fqdn}
   path: /
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+service:
+  name: docker-registry
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${docker_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
