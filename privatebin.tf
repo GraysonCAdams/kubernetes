@@ -8,11 +8,11 @@ resource "helm_release" "privatebin" {
   namespace  = "privatebin"
   depends_on = [kubernetes_namespace.privatebin]
   values = [
-    "${templatefile("${path.module}/privatebin.yaml.tmpl",
+    templatefile("${path.module}/privatebin.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
         privatebin_fqdn : var.privatebin_fqdn
       }
-    )}"
+    )
   ]
 }

@@ -8,7 +8,7 @@ resource "helm_release" "pihole" {
   namespace  = "pihole"
   depends_on = [kubernetes_namespace.pihole]
   values = [
-    "${templatefile("${path.module}/pihole.yaml.tmpl",
+    templatefile("${path.module}/pihole.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
         metallb_pool_name : var.metallb_lan_pool_name,
@@ -42,6 +42,6 @@ resource "helm_release" "pihole" {
           }
         ])
       }
-    )}"
+    )
   ]
 }

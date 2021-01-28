@@ -8,14 +8,14 @@ resource "helm_release" "metallb" {
   namespace  = "metallb"
   depends_on = [kubernetes_namespace.metallb]
   values = [
-    "${templatefile("${path.module}/metallb.yaml.tmpl",
+    templatefile("${path.module}/metallb.yaml.tmpl",
       {
-        nfs_storageclass: var.nfs_storageclass,
-        metallb_pool_name: var.metallb_pool_name,
-        metallb_ip_ranges: var.metallb_ip_ranges,
-        metallb_lan_pool_name: var.metallb_lan_pool_name,
-        metallb_lan_ip_ranges: var.metallb_lan_ip_ranges
+        nfs_storageclass : var.nfs_storageclass,
+        metallb_pool_name : var.metallb_pool_name,
+        metallb_ip_ranges : var.metallb_ip_ranges,
+        metallb_lan_pool_name : var.metallb_lan_pool_name,
+        metallb_lan_ip_ranges : var.metallb_lan_ip_ranges
       }
-    )}"
+    )
   ]
 }

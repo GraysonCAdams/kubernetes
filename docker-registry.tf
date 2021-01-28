@@ -8,13 +8,13 @@ resource "helm_release" "docker_registry" {
   namespace  = "docker-registry"
   depends_on = [kubernetes_namespace.docker_registry]
   values = [
-    "${templatefile("${path.module}/docker-registry.yaml.tmpl",
+    templatefile("${path.module}/docker-registry.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
         docker_registry_fqdn : var.docker_registry_fqdn
-        metallb_pool_name: var.metallb_pool_name,
-        docker_metallb_ip: var.docker_metallb_ip
+        metallb_pool_name : var.metallb_pool_name,
+        docker_metallb_ip : var.docker_metallb_ip
       }
-    )}"
+    )
   ]
 }

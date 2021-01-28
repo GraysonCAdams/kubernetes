@@ -8,11 +8,11 @@ resource "helm_release" "chartmuseum" {
   namespace  = "chartmuseum"
   depends_on = [kubernetes_namespace.chartmuseum]
   values = [
-    "${templatefile("${path.module}/chartmuseum.yaml.tmpl",
+    templatefile("${path.module}/chartmuseum.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
         chartsmuseum_fqdn : var.chartsmuseum_fqdn
       }
-    )}"
+    )
   ]
 }

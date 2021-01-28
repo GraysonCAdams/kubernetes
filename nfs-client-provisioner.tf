@@ -8,12 +8,12 @@ resource "helm_release" "nfs_client_provisioner" {
   namespace  = "provisioners"
   # depends_on = [kubernetes_namespace.provisioners]
   values = [
-    "${templatefile("${path.module}/nfs-client-provisioner.yaml.tmpl",
+    templatefile("${path.module}/nfs-client-provisioner.yaml.tmpl",
       {
-        nfs_server_ip: var.nfs_server_ip,
-        nfs_mount_path: var.nfs_mount_path,
-        nfs_storageclass: var.nfs_storageclass
+        nfs_server_ip : var.nfs_server_ip,
+        nfs_mount_path : var.nfs_mount_path,
+        nfs_storageclass : var.nfs_storageclass
       }
-    )}"
+    )
   ]
 }

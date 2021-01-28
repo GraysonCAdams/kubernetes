@@ -8,7 +8,7 @@ resource "helm_release" "postgres" {
   namespace  = "postgres"
   depends_on = [kubernetes_namespace.postgres]
   values = [
-    "${templatefile("${path.module}/postgres.yaml.tmpl",
+    templatefile("${path.module}/postgres.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
         metallb_pool_name: var.metallb_pool_name,
@@ -16,6 +16,6 @@ resource "helm_release" "postgres" {
         postgres_fqdn : var.postgres_fqdn,
         postgres_password: var.postgres_password
       }
-    )}"
+    )
   ]
 }
