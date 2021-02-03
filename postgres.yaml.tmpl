@@ -11,9 +11,9 @@ ingress:
 postgresqlPassword: ${postgres_password}
 
 persistence:
-    enabled: true
-    storageClass: ${nfs_storageclass}
-    size: 1Gi
+  enabled: true
+  storageClass: ${nfs_storageclass}
+  size: 5Gi
 
 service:
   type: LoadBalancer

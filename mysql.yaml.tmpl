@@ -1,0 +1,28 @@
+image:
+  registry: docker.io
+  repository: bitnami/mysql
+  tag: 8.0.23-debian-10-r0
+
+auth:
+  database: "main"
+  # Remove password after deployment
+  rootPassword: ${mysql_password}
+
+global:
+  storageClass: ${nfs_storageclass}
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+primary:
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    loadBalancerIP: ${mysql_metallb_ip}
+    annotations:
+      metallb.universe.tf/address-pool: ${metallb_pool_name}
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false

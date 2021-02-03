@@ -62,6 +62,11 @@ variable "wordpress_fqdns" {
   }))
 }
 
+variable "mysql_password" {
+  type        = string
+  description = "Admin password for accessing MySQL"
+}
+
 variable "postgres_password" {
   type        = string
   description = "Admin password for accessing Postgres"
@@ -72,6 +77,14 @@ variable "postgres_fqdn" {
 }
 
 variable "postgres_metallb_ip" {
+  type = string
+}
+
+variable "mysql_fqdn" {
+  type = string
+}
+
+variable "mysql_metallb_ip" {
   type = string
 }
 

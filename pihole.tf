@@ -33,6 +33,10 @@ resource "helm_release" "pihole" {
             "ip" : var.postgres_metallb_ip
           },
           {
+            "host" : var.mysql_fqdn,
+            "ip" : var.mysql_metallb_ip
+          },
+          {
             "host" : var.privatebin_fqdn,
             "ip" : var.reverse_proxy_ip
           },
