@@ -43,6 +43,14 @@ resource "helm_release" "pihole" {
           {
             "host" : var.chartsmuseum_fqdn,
             "ip" : var.reverse_proxy_ip
+          },
+          {
+            "host" : var.guacamole_fqdn,
+            "ip" : var.reverse_proxy_ip
+          },
+          {
+            "host" : var.plex_fqdn,
+            "ip" : var.reverse_proxy_ip
           }
         ])
       }

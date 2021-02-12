@@ -100,6 +100,10 @@ variable "rancher_fqdn" {
   type = string
 }
 
+variable "guacamole_fqdn" {
+  type = string
+}
+
 variable "rancher_ip" {
   type = string
 }
@@ -113,4 +117,24 @@ variable "local_dns_entries" {
     host = string
     ip   = string
   }))
+}
+
+variable "nas_family_path" {
+  type = string
+}
+
+variable "nas_server_ip" {
+  type = string
+}
+
+variable "plex_metallb_ip" {
+  type = string
+}
+
+variable "plex_fqdn" {
+  type = string
+}
+
+variable "plex_claim_token" {
+  type = string
 }

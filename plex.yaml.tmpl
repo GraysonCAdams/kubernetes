@@ -1,0 +1,59 @@
+image:
+  repository: plexinc/pms-docker
+  tag: 1.20.2.3402-0fec14d92
+  pullPolicy: IfNotPresent
+
+claimToken: ${plex_claim_token}
+
+allowedNetworks:
+  - 127.0.0.1
+  - 192.168.1.0/24
+
+timezone: "UTC-4"
+
+ingress:
+  enabled: true
+  hosts:
+    - ${plex_fqdn}
+
+serviceTCP:
+  type: LoadBalancer
+  port: 32400
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${plex_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_lan_pool_name}
+    metallb.universe.tf/allow-shared-ip: plex-svc
+
+serviceUDP:
+  type: LoadBalancer
+  port: 32400
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${plex_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_lan_pool_name}
+    metallb.universe.tf/allow-shared-ip: plex-svc
+
+persistence:
+  data:
+    storageClass: ${nfs_storageclass}
+    size: 1Gi
+  extraMounts:
+    - name: family
+      mountPath: mnt/family
+      volume:
+        nfs:
+          server: ${nas_server_ip}
+          path: ${nas_family_path}
+          readOnly: true
+  config:
+    storageClass: ${nfs_storageclass}
+    size: 10Gi
+
+tolerations:
+  - effect: NoSchedule
+    key: internal-lan
+    operator: Exists
+
+nodeSelector:
+  internal-lan: "true"
