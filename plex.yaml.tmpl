@@ -49,11 +49,3 @@ persistence:
   config:
     storageClass: ${nfs_storageclass}
     size: 10Gi
-
-tolerations:
-  - effect: NoSchedule
-    key: internal-lan
-    operator: Exists
-
-nodeSelector:
-  internal-lan: "true"

@@ -30,14 +30,6 @@ serviceUDP:
 
 adminPassword: ${pihole_password}
 
-tolerations:
-- effect: NoSchedule
-  key: internal-lan
-  operator: Exists
-
-nodeSelector:
-  internal-lan: 'true'
-
 dnsmasq:
   customDnsEntries:
   %{ for entry in dns_entries ~}

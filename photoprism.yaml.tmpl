@@ -1,0 +1,42 @@
+image:
+  repository: photoprism/photoprism
+  pullPolicy: IfNotPresent
+  tag: "20210211"
+
+env:
+  PHOTOPRISM_STORAGE_PATH: /photoprism/storage
+  PHOTOPRISM_ORIGINALS_PATH: /photoprism/originals/Photos
+  PHOTOPRISM_READONLY: "true"
+  PHOTOPRISM_SITE_URL: "https://${photoprism_fqdn}/"
+  PHOTOPRISM_SITE_TITLE: "G.NET Photos"
+  PHOTOPRISM_SITE_AUTHOR: "Grayson Adams"
+  PHOTOPRISM_DEBUG: "true"
+  PHOTOPRISM_PUBLIC: "true"
+  PHOTOPRISM_DATABASE_DRIVER: mysql
+  PHOTOPRISM_DATABASE_SERVER: ${db_host}
+  PHOTOPRISM_DATABASE_NAME: ${db_name}
+  PHOTOPRISM_DATABASE_USER: ${db_user}
+  PHOTOPRISM_DATABASE_PASSWORD: ${db_pass}
+
+service:
+  port:
+    port: 2342
+
+persistence:
+  config:
+    enabled: true
+    storageClass: ${nfs_storageclass}
+    mountPath: /photoprism/storage
+    size: 20Gi
+  originals:
+    enabled: true
+    existingClaim: ${family_media_pvc}
+    mountPath: /photoprism/originals
+    accessMode: ReadOnlyMany
+    skipuninstall: true
+
+probes:
+  liveness:
+    enabled: false
+  readiness:
+    enabled: false

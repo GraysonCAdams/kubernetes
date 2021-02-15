@@ -30,14 +30,6 @@ variable "metallb_ip_ranges" {
   type = list(string)
 }
 
-variable "metallb_lan_pool_name" {
-  type = string
-}
-
-variable "metallb_lan_ip_ranges" {
-  type = list(string)
-}
-
 variable "pihole_metallb_ip" {
   type = string
 }
@@ -45,14 +37,6 @@ variable "pihole_metallb_ip" {
 variable "pihole_password" {
   type        = string
   description = "Admin password for accessing Pi-Hole"
-}
-
-variable "unifi_metallb_ip" {
-  type = string
-}
-
-variable "unifi_fqdn" {
-  type = string
 }
 
 variable "wordpress_fqdns" {
@@ -137,4 +121,36 @@ variable "plex_fqdn" {
 
 variable "plex_claim_token" {
   type = string
+}
+
+variable "photoprism_fqdn" {
+  type = string
+}
+
+variable "photoprism_db_user" {
+  type = string
+}
+
+variable "photoprism_db_pass" {
+  type = string
+}
+
+variable "photoprism_db_name" {
+  type = string
+}
+
+variable "oauth_metallb_ip" {
+  type = string
+}
+
+variable "photos_email_whitelist" {
+
+}
+
+variable "google_photos_client_id" {
+  
+}
+
+variable "google_photos_client_secret" {
+  
 }

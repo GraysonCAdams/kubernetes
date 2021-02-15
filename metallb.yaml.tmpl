@@ -1,16 +1,3 @@
-controller:
-  tolerations:
-  - effect: NoSchedule
-    key: internal-lan
-    operator: Exists
-
-
-speaker:
-  tolerations:
-  - effect: NoSchedule
-    key: internal-lan
-    operator: Exists
-
 configInline:
   # The address-pools section lists the IP addresses that MetalLB is
   # allowed to allocate, along with settings for how to advertise
@@ -21,7 +8,3 @@ configInline:
     protocol: layer2
     addresses:
     ${indent(4, yamlencode(metallb_ip_ranges))}
-  - name: ${metallb_lan_pool_name}
-    protocol: layer2
-    addresses:
-    ${indent(4, yamlencode(metallb_lan_ip_ranges))}

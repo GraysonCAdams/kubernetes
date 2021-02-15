@@ -231,7 +231,7 @@ resource "kubernetes_namespace" "mysql" {
 resource "kubernetes_namespace" "plex" {
   metadata {
     annotations = {
-      name                                        = "myplexsql"
+      name                                        = "plex"
       "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
       "field.cattle.io/projectId"                 = "placeholder"
       "cattle.io/status"                          = "placeholder"
@@ -240,6 +240,29 @@ resource "kubernetes_namespace" "plex" {
       "field.cattle.io/projectId" = "placeholder"
     }
     name = "plex"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "photos" {
+  metadata {
+    annotations = {
+      name                                        = "photos"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "photos"
   }
   lifecycle {
     ignore_changes = [

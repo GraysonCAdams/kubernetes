@@ -1,0 +1,28 @@
+image:
+  repository: "quay.io/oauth2-proxy/oauth2-proxy"
+  tag: "v6.1.1"
+  pullPolicy: "IfNotPresent"
+
+config:
+  clientID: ${google_photos_client_id}
+  clientSecret: ${google_photos_client_secret}
+  cookieRefresh: 1h
+  cookieDomain: .${photoprism_fqdn}
+  google: {}
+  configFile: |-
+    upstreams = [ "http://photos-photoprism:2342" ]
+    skip_provider_button = true
+
+authenticatedEmailsFile:
+  enabled: true
+  restricted_access: |-
+    ${indent(4, photos_email_whitelist)}
+
+serviceAccount:
+  enabled: false
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - ${photoprism_fqdn}

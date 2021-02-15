@@ -12,7 +12,7 @@ resource "helm_release" "plex" {
       {
         plex_claim_token: var.plex_claim_token,
         nfs_storageclass : var.nfs_storageclass,
-        metallb_lan_pool_name: var.metallb_lan_pool_name,
+        metallb_lan_pool_name: var.metallb_pool_name,
         plex_metallb_ip: var.plex_metallb_ip,
         plex_fqdn : var.plex_fqdn,
         nas_server_ip: var.nas_server_ip,

@@ -11,7 +11,7 @@ resource "helm_release" "pihole" {
     templatefile("${path.module}/pihole.yaml.tmpl",
       {
         nfs_storageclass : var.nfs_storageclass,
-        metallb_pool_name : var.metallb_lan_pool_name,
+        metallb_pool_name : var.metallb_pool_name,
         pihole_metallb_ip : var.pihole_metallb_ip,
         pihole_fqdn : var.pihole_fqdn,
         pihole_password : var.pihole_password,
@@ -50,6 +50,10 @@ resource "helm_release" "pihole" {
           },
           {
             "host" : var.plex_fqdn,
+            "ip" : var.reverse_proxy_ip
+          },
+          {
+            "host" : var.photoprism_fqdn,
             "ip" : var.reverse_proxy_ip
           }
         ])
