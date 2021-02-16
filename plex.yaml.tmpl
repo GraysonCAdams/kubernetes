@@ -11,11 +11,6 @@ allowedNetworks:
 
 timezone: "UTC-4"
 
-ingress:
-  enabled: true
-  hosts:
-    - ${plex_fqdn}
-
 serviceTCP:
   type: LoadBalancer
   port: 32400
@@ -34,6 +29,12 @@ serviceUDP:
     metallb.universe.tf/address-pool: ${metallb_lan_pool_name}
     metallb.universe.tf/allow-shared-ip: plex-svc
 
+ingress:
+  enabled: true
+  hosts:
+    - ${plex_fqdn}
+  path: /
+  
 persistence:
   data:
     storageClass: ${nfs_storageclass}
@@ -45,6 +46,13 @@ persistence:
         nfs:
           server: ${nas_server_ip}
           path: ${nas_family_path}
+          readOnly: true
+    - name: certs
+      mountPath: mnt/certs
+      volume:
+        nfs:
+          server: ${nfs_server_ip}
+          path: /mnt/certs
           readOnly: true
   config:
     storageClass: ${nfs_storageclass}

@@ -15,6 +15,7 @@ resource "helm_release" "plex" {
         metallb_lan_pool_name: var.metallb_pool_name,
         plex_metallb_ip: var.plex_metallb_ip,
         plex_fqdn : var.plex_fqdn,
+        nfs_server_ip: var.nfs_server_ip,
         nas_server_ip: var.nas_server_ip,
         nas_family_path: var.nas_family_path
       }
