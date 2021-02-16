@@ -49,10 +49,6 @@ resource "helm_release" "pihole" {
             "ip" : var.reverse_proxy_ip
           },
           {
-            "host" : var.plex_fqdn,
-            "ip" : var.reverse_proxy_ip
-          },
-          {
             "host" : var.photoprism_fqdn,
             "ip" : var.reverse_proxy_ip
           }
