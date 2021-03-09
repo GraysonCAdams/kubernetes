@@ -58,10 +58,5 @@ persistence:
     storageClass: ${nfs_storageclass}
     size: 10Gi
 
-tolerations:
-  - effect: NoSchedule
-    key: performance
-    operator: Exists
-
 nodeSelector:
   performance: "true"
