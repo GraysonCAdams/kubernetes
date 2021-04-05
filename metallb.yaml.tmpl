@@ -8,3 +8,15 @@ configInline:
     protocol: layer2
     addresses:
     ${indent(4, yamlencode(metallb_ip_ranges))}
+
+controller:
+  tolerations:
+    - effect: NoSchedule
+      key: performance
+      operator: Exists
+
+speaker:
+  tolerations:
+    - effect: NoSchedule
+      key: performance
+      operator: Exists

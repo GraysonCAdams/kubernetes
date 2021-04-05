@@ -1,0 +1,31 @@
+image:
+  repository: bitwardenrs/server
+  tag: latest
+  pullPolicy: IfNotPresent
+
+ingress:
+    enabled: true
+    hosts:
+        - ${bitwarden_fqdn}
+
+service:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: ${bitwarden_metallb_ip}
+  annotations:
+    metallb.universe.tf/address-pool: ${metallb_pool_name}
+
+env:
+  SIGNUPS_ALLOWED: false
+  INVITATIONS_ALLOWED: false
+  DATABASE_URL: ${bitwarden_db_url}
+  WEB_VAULT_ENABLED: true
+  WEBSOCKET_ENABLED: false
+  DOMAIN: https://${bitwarden_fqdn}
+
+persistence:
+  enabled: true
+  storageClass: ${nfs_storageclass}
+  size: 800Mi
+
+

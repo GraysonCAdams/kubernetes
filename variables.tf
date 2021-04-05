@@ -107,6 +107,11 @@ variable "nas_family_path" {
   type = string
 }
 
+variable "nas_plex_path" {
+  type = string
+}
+
+
 variable "nas_server_ip" {
   type = string
 }
@@ -153,4 +158,32 @@ variable "google_photos_client_id" {
 
 variable "google_photos_client_secret" {
   
+}
+
+variable "bookstack_mc_fqdn" {
+  type = string
+}
+
+variable "bookstack_mc_db_user" {
+  type = string
+}
+
+variable "bookstack_mc_db_pass" {
+  type = string
+}
+
+variable "bookstack_mc_db_name" {
+  type = string
+}
+
+variable "bitwarden_fqdn" {
+  type = string
+}
+
+variable "bitwarden_metallb_ip" {
+  type = string
+}
+
+variable "bitwarden_db_url" {
+  type = string
 }

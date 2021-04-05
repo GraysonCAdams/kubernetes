@@ -273,3 +273,49 @@ resource "kubernetes_namespace" "photos" {
     ]
   }
 }
+
+resource "kubernetes_namespace" "bookstack_mc" {
+  metadata {
+    annotations = {
+      name                                        = "bookstack-mc"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "bookstack-mc"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "bitwarden" {
+  metadata {
+    annotations = {
+      name                                        = "bitwarden"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "bitwarden"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}

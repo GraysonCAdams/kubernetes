@@ -1,7 +1,7 @@
 image:
   repository: plexinc/pms-docker
-  tag: 1.20.2.3402-0fec14d92
-  pullPolicy: IfNotPresent
+  tag: latest
+  pullPolicy: Always
 
 claimToken: ${plex_claim_token}
 
@@ -29,11 +29,11 @@ serviceUDP:
     metallb.universe.tf/address-pool: ${metallb_lan_pool_name}
     metallb.universe.tf/allow-shared-ip: plex-svc
 
-ingress:
-  enabled: true
-  hosts:
-    - ${plex_fqdn}
-  path: /
+# ingress:
+#   enabled: true
+#   hosts:
+#     - ${plex_fqdn}
+#   path: /
   
 persistence:
   data:
@@ -47,6 +47,13 @@ persistence:
           server: ${nas_server_ip}
           path: ${nas_family_path}
           readOnly: true
+    - name: safe
+      mountPath: mnt/safe
+      volume:
+        nfs:
+          server: ${nas_server_ip}
+          path: ${nas_plex_path}
+          readOnly: true
     - name: certs
       mountPath: mnt/certs
       volume:
@@ -55,8 +62,10 @@ persistence:
           path: /mnt/certs
           readOnly: true
   config:
-    storageClass: ${nfs_storageclass}
+    claimName: ${plex_config_pvc}
+    # storageClass: ${nfs_storageclass}
     size: 10Gi
+    accessMode: ReadWriteOnce
 
 tolerations:
   - effect: NoSchedule
@@ -65,3 +74,9 @@ tolerations:
 
 nodeSelector:
   performance: "true"
+
+resources:
+  limits:
+    memory: 6144Mi
+  requests:
+    memory: 6144Mi
