@@ -274,17 +274,10 @@ resource "kubernetes_namespace" "photos" {
   }
 }
 
-<<<<<<< HEAD
-resource "kubernetes_namespace" "drew" {
-  metadata {
-    annotations = {
-      name                                        = "drew"
-=======
 resource "kubernetes_namespace" "bookstack_mc" {
   metadata {
     annotations = {
       name                                        = "bookstack-mc"
->>>>>>> 1789dc252614196ebbd632b2902c5fc0fa8547a3
       "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
       "field.cattle.io/projectId"                 = "placeholder"
       "cattle.io/status"                          = "placeholder"
@@ -292,9 +285,6 @@ resource "kubernetes_namespace" "bookstack_mc" {
     labels = {
       "field.cattle.io/projectId" = "placeholder"
     }
-<<<<<<< HEAD
-    name = "drew"
-=======
     name = "bookstack-mc"
   }
   lifecycle {
@@ -319,7 +309,29 @@ resource "kubernetes_namespace" "bitwarden" {
       "field.cattle.io/projectId" = "placeholder"
     }
     name = "bitwarden"
->>>>>>> 1789dc252614196ebbd632b2902c5fc0fa8547a3
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].annotations["cattle.io/status"],
+      metadata[0].annotations["field.cattle.io/projectId"],
+      metadata[0].annotations["lifecycle.cattle.io/create.namespace-auth"],
+      metadata[0].labels["field.cattle.io/projectId"]
+    ]
+  }
+}
+
+resource "kubernetes_namespace" "drew" {
+  metadata {
+    annotations = {
+      name                                        = "drew"
+      "lifecycle.cattle.io/create.namespace-auth" = "placeholder"
+      "field.cattle.io/projectId"                 = "placeholder"
+      "cattle.io/status"                          = "placeholder"
+    }
+    labels = {
+      "field.cattle.io/projectId" = "placeholder"
+    }
+    name = "drew"
   }
   lifecycle {
     ignore_changes = [
