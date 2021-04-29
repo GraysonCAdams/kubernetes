@@ -51,6 +51,10 @@ resource "helm_release" "pihole" {
           {
             "host" : var.photoprism_fqdn,
             "ip" : var.reverse_proxy_ip
+          },
+          {
+            "host" : var.bitwarden_fqdn,
+            "ip" : var.reverse_proxy_ip
           }
         ])
       }

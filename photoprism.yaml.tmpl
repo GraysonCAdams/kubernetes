@@ -18,7 +18,6 @@ env:
   PHOTOPRISM_DATABASE_USER: ${db_user}
   PHOTOPRISM_DATABASE_PASSWORD: ${db_pass}
   PHOTOPRISM_DISABLE_SETTINGS: "true"
-  PHOTOPRISM_DISABLE_SETTINGS: "true"
   PHOTOPRISM_DISABLE_WEBDAV: "true"
 
 service:
@@ -34,7 +33,7 @@ persistence:
   originals:
     enabled: true
     existingClaim: ${family_media_pvc}
-    mountPath: /photoprism/originals
+    mountPath: /photoprism/originals/
     accessMode: ReadOnlyMany
     skipuninstall: true
 
