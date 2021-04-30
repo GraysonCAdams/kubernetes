@@ -24,15 +24,15 @@ ingress:
   extraHosts:
     - name: www.${wordpress_drew_fqdn}
       path: /
-
-service:
-  type: LoadBalancer
-  port: 80
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       location ~ /wp-admin$ {
            return 301 /wp-admin/;
        }
+
+service:
+  type: NodePort
+  port: 80
 
 livenessProbe:
   enabled: false
