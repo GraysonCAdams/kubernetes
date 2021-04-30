@@ -19,10 +19,10 @@ externalDatabase:
 
 ingress:
   enabled: true
-  hostname: ${wordpress_drew_fqdn}
+  hostname: www.${wordpress_drew_fqdn}
   path: /
   extraHosts:
-    - name: www.${wordpress_drew_fqdn}
+    - name: ${wordpress_drew_fqdn}
       path: /
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
