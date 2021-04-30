@@ -187,3 +187,27 @@ variable "bitwarden_metallb_ip" {
 variable "bitwarden_db_url" {
   type = string
 }
+
+variable "wordpress_drew_fqdn" {
+  type = string
+}
+
+variable "wordpress_drew_username" {
+  type = string
+}
+
+variable "wordpress_drew_password" {
+  type = string
+}
+
+variable "wordpress_drew_db_name" {
+  type = string
+}
+
+variable "wordpress_drew_db_username" {
+  type = string
+}
+
+variable "wordpress_drew_db_password" {
+  type = string
+}

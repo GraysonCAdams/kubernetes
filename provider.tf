@@ -1,9 +1,16 @@
 provider "helm" {
   kubernetes {
     config_path = "~/.kube/local-config"
+    config_context = "local"
+    insecure = true
   }
 }
 
+provider "kubernetes" {
+  config_path = "~/.kube/local-config"
+  config_context = "local"
+  insecure = true
+}
 
 provider "aws" {
   region  = "us-east-1"

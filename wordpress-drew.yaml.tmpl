@@ -1,0 +1,57 @@
+image:
+  registry: docker.io
+  repository: bitnami/wordpress
+  tag: latest
+
+timezone: "UTC-4"
+
+wordpressSkipInstall: true
+wordpressUsername: ${wordpress_drew_username}
+wordpressPassword: ${wordpress_drew_password}
+wordpressScheme: https
+
+externalDatabase:
+  host: ${mysql_metallb_ip}
+  port: 3306
+  user: ${wordpress_drew_db_username}
+  password: ${wordpress_drew_db_password}
+  database: ${wordpress_drew_db_name}
+
+ingress:
+  enabled: true
+  hostname: ${wordpress_drew_fqdn}
+  path: /
+  extraHosts:
+    - name: www.${wordpress_drew_fqdn}
+      path: /
+
+service:
+  type: LoadBalancer
+  port: 80
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      location ~ /wp-admin$ {
+           return 301 /wp-admin/;
+       }
+
+livenessProbe:
+  enabled: false
+
+readinessProbe:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: ${nfs_storageclass}
+  size: 10Gi
+  accessMode: ReadWriteOnce
+
+resources:
+  limits:
+    memory: 1024Mi
+  requests:
+    memory: 1024Mi
+
+mariadb:
+  enabled: false
+
